@@ -1,28 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Maternity Leave Budget Planner - Under maintenance</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="site-status" content="maintenance">
-<meta name="description" content="This tool is temporarily offline while it is rebuilt.">
+<title>Maternity Leave Budget Planner</title>
+<meta name="description" content="Calculate parental leave savings goals, income gap, and baby budget needs.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://us-maternity-leave-budget.enjoy-onepage.com/">
+<meta name="theme-color" content="#db2777">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Maternity Leave Budget Planner">
+<meta property="og:title" content="Maternity Leave Budget Planner">
+<meta property="og:description" content="Calculate parental leave savings goals, income gap, and baby budget needs.">
+<meta property="og:url" content="https://us-maternity-leave-budget.enjoy-onepage.com/">
+<meta property="og:image" content="https://us-maternity-leave-budget.enjoy-onepage.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Maternity Leave Budget Planner">
+<meta name="twitter:description" content="Calculate parental leave savings goals, income gap, and baby budget needs.">
+<meta name="twitter:image" content="https://us-maternity-leave-budget.enjoy-onepage.com/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="Maternity Budget RSS" href="https://us-maternity-leave-budget.enjoy-onepage.com/rss.xml">
+<link rel="sitemap" type="application/xml" href="https://us-maternity-leave-budget.enjoy-onepage.com/sitemap.xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://us-maternity-leave-budget.enjoy-onepage.com/#webapp",
+      "name": "Maternity Leave Budget Planner",
+      "url": "https://us-maternity-leave-budget.enjoy-onepage.com/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "inLanguage": "en",
+      "description": "Interactive maternity and parental leave budget calculator estimating unpaid leave gaps, baby arrival costs, and required monthly savings targets.",
+      "image": "https://us-maternity-leave-budget.enjoy-onepage.com/og-image.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://us-maternity-leave-budget.enjoy-onepage.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much money should I save before maternity leave?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Financial planners recommend calculating your net income deficit during unpaid or partially paid leave plus upfront hospital and nursery expenses, typically creating a cash reserve of 3 to 6 months of living expenses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do Short-Term Disability and Paid Family Leave combine for maternity leave?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In many states, Short-Term Disability covers 6 to 8 weeks of physical recovery for the birthing parent, followed by state Paid Family Leave or company parental leave for bonding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can both parents take paid leave for the same baby?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most state paid leave programs and employer policies grant both parents individual allotments of leave (typically 8 to 12 weeks each) that can be taken concurrently or consecutively."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6946654760086847" crossorigin="anonymous"></script>
 <style>
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #0f172a; }
-  main { max-width: 560px; margin: 12vh auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; }
-  h1 { font-size: 1.4rem; margin: 0 0 12px; }
-  p { line-height: 1.6; color: #334155; }
-  a { color: #1d4ed8; font-weight: 600; }
-  .tag { display: inline-block; font-size: .8rem; font-weight: 700; color: #92400e; background: #fef3c7; border-radius: 999px; padding: 4px 10px; margin-bottom: 14px; }
+  :root {
+    --primary: #db2777;
+    --primary-hover: #be185d;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 0 16px;
+  }
+  .container { max-width: 1040px; margin: 0 auto; padding: 24px 0 48px; }
+  header { text-align: center; margin-bottom: 24px; }
+  header h1 { font-size: 1.85rem; font-weight: 800; color: #1e293b; margin-bottom: 6px; }
+  header p { font-size: 0.95rem; color: var(--text-muted); }
+
+  .manual-ad-box {
+    margin: 16px auto;
+    text-align: center;
+    background: transparent;
+  }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  @media (min-width: 768px) {
+    .grid2 { grid-template-columns: 1fr 1fr; }
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .card h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .form-row { display: flex; gap: 10px; margin-bottom: 12px; }
+  .form-col { flex: 1; }
+  .form-group { margin-bottom: 12px; }
+  .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: #334155; margin-bottom: 4px; }
+  .form-input, .form-select {
+    width: 100%;
+    padding: 8px 11px;
+    font-size: 0.88rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+    background: #ffffff;
+  }
+  .form-input:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(219,39,119,0.12);
+  }
+
+  .summary-banner {
+    background: #fdf2f8;
+    border: 2px solid #fbcfe8;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .summary-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; color: #be185d; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .summary-value { font-size: 2.1rem; font-weight: 800; color: #831843; font-family: ui-monospace, SFMono-Regular, monospace; }
+  .summary-sub { font-size: 0.8rem; color: #db2777; font-weight: 600; margin-top: 4px; }
+
+  .dual-stat {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-card .v { font-size: 1.15rem; font-weight: 800; color: #1e293b; }
+  .stat-card .l { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+
+  .breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+  .breakdown-table tr { border-bottom: 1px solid #f1f5f9; }
+  .breakdown-table tr:last-child { border-bottom: none; }
+  .breakdown-table td { padding: 8px 4px; }
+  .breakdown-table .k { color: var(--text-muted); font-weight: 500; }
+  .breakdown-table .v { text-align: right; font-weight: 700; color: #1e293b; }
+
+  .info-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .info-section h2 { font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-bottom: 16px; }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 640px) {
+    .info-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .how-step {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .how-step .step-num {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    border-radius: 50%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .how-step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: #1e293b; }
+  .how-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
+
+  .faq-list { margin-top: 14px; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item h3 { font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+  .faq-item p { font-size: 0.85rem; color: #475569; line-height: 1.5; }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f172a;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: .85rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+    z-index: 9999;
+  }
+  .toast.show { opacity: 1; }
+
+  footer {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+  footer a { color: var(--text-muted); text-decoration: none; margin: 0 8px; }
+  footer a:hover { color: var(--text-main); text-decoration: underline; }
 </style>
 </head>
 <body>
-<main>
-  <span class="tag">Under maintenance</span>
-  <h1>Maternity Leave Budget Planner</h1>
-  <p>This tool is temporarily offline. We found that the previous version did not work the way it was described, so we took it down while we rebuild it properly.</p>
-  <p>Please check back later.</p>
-  <p><a href="https://enjoy-onepage.com/">Browse our other free tools</a></p>
-</main>
+<div class="container">
+  <header>
+    <h1>Maternity Leave Budget Planner</h1>
+    <p>Calculate your leave savings goal, income gap, and baby arrival budget.</p>
+  </header>
+
+  <!-- ADSENSE START: top -->
+  <div class="manual-ad-box ad-top-banner" style="width: 100%; max-width: 960px; min-height: 100px; margin: 0 auto 16px; text-align: center; background: transparent;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height: 100px;"
+         data-ad-client="ca-pub-6946654760086847"
+         data-ad-slot="3824727725"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: top -->
+
+  <div class="grid2">
+    <section class="card">
+      <h2>Timeline &amp; Income Sources</h2>
+
+      <div class="form-row">
+        <div class="form-col">
+          <label class="form-label" for="leaveWeeks">Leave Duration (Weeks)</label>
+          <input type="number" id="leaveWeeks" class="form-input" value="12" min="1" max="26">
+        </div>
+        <div class="form-col">
+          <label class="form-label" for="monthsToSave">Months to Due Date</label>
+          <input type="number" id="monthsToSave" class="form-input" value="6" min="1" max="12">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="normalNetMonthly">Your Normal Monthly Net Take-Home ($)</label>
+        <input type="number" id="normalNetMonthly" class="form-input" value="4500" min="0" step="100">
+      </div>
+
+      <div class="form-row">
+        <div class="form-col">
+          <label class="form-label" for="employerPaidWeeks">Company 100% Paid (Weeks)</label>
+          <input type="number" id="employerPaidWeeks" class="form-input" value="4" min="0" max="16">
+        </div>
+        <div class="form-col">
+          <label class="form-label" for="stdWeeklyPay">STD / State Leave ($/wk)</label>
+          <input type="number" id="stdWeeklyPay" class="form-input" value="750" min="0" step="50">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-col">
+          <label class="form-label" for="partnerMonthly">Partner Net Income ($/mo)</label>
+          <input type="number" id="partnerMonthly" class="form-input" value="3800" min="0" step="100">
+        </div>
+        <div class="form-col">
+          <label class="form-label" for="ptoBanked">Banked PTO ($ Total)</label>
+          <input type="number" id="ptoBanked" class="form-input" value="1000" min="0" step="100">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-col">
+          <label class="form-label" for="livingExpenses">Monthly Household Budget ($/mo)</label>
+          <input type="number" id="livingExpenses" class="form-input" value="5000" min="0" step="100">
+        </div>
+        <div class="form-col">
+          <label class="form-label" for="upfrontBabyCosts">Hospital &amp; Gear Upfront ($)</label>
+          <input type="number" id="upfrontBabyCosts" class="form-input" value="2500" min="0" step="100">
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Savings Goal &amp; Cash Flow</h2>
+
+      <div class="summary-banner">
+        <div class="summary-title">Total Maternity Savings Goal Needed</div>
+        <div class="summary-value" id="valSavingsGoal">$3,885</div>
+        <div class="summary-sub" id="valMonthlyTarget">Save $648 / mo before baby arrives</div>
+      </div>
+
+      <div class="dual-stat">
+        <div class="stat-card">
+          <div class="v" id="valTotalExpenses">$16,346</div>
+          <div class="l">Total Leave Expenses</div>
+        </div>
+        <div class="stat-card">
+          <div class="v" id="valTotalIncome">$12,461</div>
+          <div class="l">Expected Leave Income</div>
+        </div>
+      </div>
+
+      <table class="breakdown-table">
+        <tbody>
+          <tr>
+            <td class="k">Household Living Costs (<span id="lblWeeks">12</span> wks):</td>
+            <td class="v" id="valLivingTotal">$13,846</td>
+          </tr>
+          <tr>
+            <td class="k">Upfront Baby Delivery &amp; Nursery:</td>
+            <td class="v" id="valUpfrontTotal">$2,500</td>
+          </tr>
+          <tr>
+            <td class="k">Your Paid Leave &amp; STD Income:</td>
+            <td class="v" id="valYourIncome">$5,961</td>
+          </tr>
+          <tr>
+            <td class="k">Partner Income (<span id="lblMonths">2.77</span> mos):</td>
+            <td class="v" id="valPartnerTotal">$10,523</td>
+          </tr>
+          <tr>
+            <td class="k">Net Cash Flow Deficit:</td>
+            <td class="v" id="valNetDeficit" style="color: #db2777;">-$3,885</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <!-- ADSENSE START: mid -->
+  <div class="manual-ad-box ad-mid-banner" style="width: 100%; max-width: 960px; min-height: 250px; margin: 20px auto; text-align: center; background: transparent;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height: 250px;"
+         data-ad-client="ca-pub-6946654760086847"
+         data-ad-slot="1186914926"
+         data-ad-format="rectangle,horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: mid -->
+
+  <section class="info-section">
+    <h2>How to Budget for Parental Leave</h2>
+    <div class="info-grid">
+      <div class="how-step">
+        <span class="step-num">1</span>
+        <h3>Stack Leave Income</h3>
+        <p>Combine employer paid weeks, short-term disability insurance, and state PFML benefits.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">2</span>
+        <h3>Include Delivery Out-of-Pocket</h3>
+        <p>Budget for hospital deductible maximums, cribs, car seats, strollers, and early baby supplies.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">3</span>
+        <h3>Automate Monthly Savings</h3>
+        <p>Divide the net deficit by months remaining until the due date into a dedicated high-yield savings fund.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item"><h3>How much money should I save before maternity leave?</h3><p>Financial planners recommend calculating your net income deficit during unpaid or partially paid leave plus upfront hospital and nursery expenses, typically creating a cash reserve of 3 to 6 months of living expenses.</p></div>
+      <div class="faq-item"><h3>How do Short-Term Disability and Paid Family Leave combine for maternity leave?</h3><p>In many states, Short-Term Disability covers 6 to 8 weeks of physical recovery for the birthing parent, followed by state Paid Family Leave or company parental leave for bonding.</p></div>
+      <div class="faq-item"><h3>Can both parents take paid leave for the same baby?</h3><p>Yes. Most state paid leave programs and employer policies grant both parents individual allotments of leave (typically 8 to 12 weeks each) that can be taken concurrently or consecutively.</p></div>
+    </div>
+  </section>
+
+  <!-- ADSENSE START: bottom -->
+  <div class="manual-ad-box ad-bottom-banner" style="width: 100%; max-width: 960px; min-height: 280px; margin: 24px auto 16px; text-align: center; background: transparent;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height: 280px;"
+         data-ad-client="ca-pub-6946654760086847"
+         data-ad-slot="3416334507"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: bottom -->
+
+  <div id="global-ux-toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer>
+    <p>&copy; 2026 Maternity Leave Budget Planner. All rights reserved.</p>
+    <p style="margin-top: 8px;">
+      <a href="/privacy.html">Privacy Policy</a> &bull;
+      <a href="/terms.html">Terms of Service</a> &bull;
+      <a href="/disclaimer.html">Disclaimer</a>
+    </p>
+  </footer>
+</div>
+
+<!-- LOGIC START -->
+<script>
+(function() {
+  const leaveWeeksEl = document.getElementById('leaveWeeks');
+  const monthsToSaveEl = document.getElementById('monthsToSave');
+  const normalNetMonthlyEl = document.getElementById('normalNetMonthly');
+  const employerPaidWeeksEl = document.getElementById('employerPaidWeeks');
+  const stdWeeklyPayEl = document.getElementById('stdWeeklyPay');
+  const partnerMonthlyEl = document.getElementById('partnerMonthly');
+  const ptoBankedEl = document.getElementById('ptoBanked');
+  const livingExpensesEl = document.getElementById('livingExpenses');
+  const upfrontBabyCostsEl = document.getElementById('upfrontBabyCosts');
+
+  const valSavingsGoalEl = document.getElementById('valSavingsGoal');
+  const valMonthlyTargetEl = document.getElementById('valMonthlyTarget');
+  const valTotalExpensesEl = document.getElementById('valTotalExpenses');
+  const valTotalIncomeEl = document.getElementById('valTotalIncome');
+  const lblWeeksEl = document.getElementById('lblWeeks');
+  const lblMonthsEl = document.getElementById('lblMonths');
+  const valLivingTotalEl = document.getElementById('valLivingTotal');
+  const valUpfrontTotalEl = document.getElementById('valUpfrontTotal');
+  const valYourIncomeEl = document.getElementById('valYourIncome');
+  const valPartnerTotalEl = document.getElementById('valPartnerTotal');
+  const valNetDeficitEl = document.getElementById('valNetDeficit');
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function calculate() {
+    const weeks = Math.max(1, parseInt(leaveWeeksEl.value, 10) || 12);
+    const monthsSave = Math.max(1, parseInt(monthsToSaveEl.value, 10) || 6);
+    const normalMonthly = Math.max(0, parseFloat(normalNetMonthlyEl.value) || 0);
+    const normalWeekly = (normalMonthly * 12) / 52;
+    const empPaidWeeks = Math.min(weeks, Math.max(0, parseInt(employerPaidWeeksEl.value, 10) || 0));
+    const stdWeekly = Math.max(0, parseFloat(stdWeeklyPayEl.value) || 0);
+    const partnerMonthly = Math.max(0, parseFloat(partnerMonthlyEl.value) || 0);
+    const pto = Math.max(0, parseFloat(ptoBankedEl.value) || 0);
+    const monthlyExp = Math.max(0, parseFloat(livingExpensesEl.value) || 0);
+    const upfront = Math.max(0, parseFloat(upfrontBabyCostsEl.value) || 0);
+
+    const durationMonths = weeks / 4.333;
+    lblWeeksEl.textContent = weeks;
+    lblMonthsEl.textContent = durationMonths.toFixed(1);
+
+    // Expenses during leave
+    const livingTotal = monthlyExp * durationMonths;
+    const totalExpenses = livingTotal + upfront;
+
+    // Income during leave
+    const empPay = normalWeekly * empPaidWeeks;
+    const remainingWeeks = Math.max(0, weeks - empPaidWeeks);
+    const stdPay = stdWeekly * remainingWeeks;
+    const yourTotal = empPay + stdPay + pto;
+    const partnerTotal = partnerMonthly * durationMonths;
+    const totalIncome = yourTotal + partnerTotal;
+
+    const deficit = Math.max(0, totalExpenses - totalIncome);
+    const monthlyTarget = deficit / monthsSave;
+
+    valSavingsGoalEl.textContent = fmt(deficit);
+    if (deficit > 0) {
+      valMonthlyTarget.textContent = 'Save ' + fmt(monthlyTarget) + ' / mo before baby arrives';
+      valNetDeficitEl.textContent = '-' + fmt(deficit);
+      valNetDeficitEl.style.color = '#db2777';
+    } else {
+      valMonthlyTarget.textContent = 'Fully funded! Income exceeds leave expenses';
+      valNetDeficitEl.textContent = '+$0 (Fully Covered)';
+      valNetDeficitEl.style.color = '#059669';
+    }
+
+    valTotalExpensesEl.textContent = fmt(totalExpenses);
+    valTotalIncomeEl.textContent = fmt(totalIncome);
+    valLivingTotalEl.textContent = fmt(livingTotal);
+    valUpfrontTotalEl.textContent = fmt(upfront);
+    valYourIncomeEl.textContent = fmt(yourTotal);
+    valPartnerTotalEl.textContent = fmt(partnerTotal);
+  }
+
+  [leaveWeeksEl, monthsToSaveEl, normalNetMonthlyEl, employerPaidWeeksEl, stdWeeklyPayEl, partnerMonthlyEl, ptoBankedEl, livingExpensesEl, upfrontBabyCostsEl].forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  calculate();
+})();
+</script>
+<!-- LOGIC END -->
 </body>
 </html>
