@@ -515,14 +515,14 @@
   function calculate() {
     const weeks = Math.max(1, parseInt(leaveWeeksEl.value, 10) || 12);
     const monthsSave = Math.max(1, parseInt(monthsToSaveEl.value, 10) || 6);
-    const normalMonthly = Math.max(0, parseFloat(normalNetMonthlyEl.value) || 0);
+    const normalMonthly = Math.max(0, Math.max(0, parseFloat(normalNetMonthlyEl.value) || 0));
     const normalWeekly = (normalMonthly * 12) / 52;
-    const empPaidWeeks = Math.min(weeks, Math.max(0, parseInt(employerPaidWeeksEl.value, 10) || 0));
-    const stdWeekly = Math.max(0, parseFloat(stdWeeklyPayEl.value) || 0);
-    const partnerMonthly = Math.max(0, parseFloat(partnerMonthlyEl.value) || 0);
-    const pto = Math.max(0, parseFloat(ptoBankedEl.value) || 0);
-    const monthlyExp = Math.max(0, parseFloat(livingExpensesEl.value) || 0);
-    const upfront = Math.max(0, parseFloat(upfrontBabyCostsEl.value) || 0);
+    const empPaidWeeks = Math.min(weeks, Math.max(0, Math.max(0, parseInt(employerPaidWeeksEl.value, 10) || 0)));
+    const stdWeekly = Math.max(0, Math.max(0, parseFloat(stdWeeklyPayEl.value) || 0));
+    const partnerMonthly = Math.max(0, Math.max(0, parseFloat(partnerMonthlyEl.value) || 0));
+    const pto = Math.max(0, Math.max(0, parseFloat(ptoBankedEl.value) || 0));
+    const monthlyExp = Math.max(0, Math.max(0, parseFloat(livingExpensesEl.value) || 0));
+    const upfront = Math.max(0, Math.max(0, parseFloat(upfrontBabyCostsEl.value) || 0));
 
     const durationMonths = weeks / 4.333;
     lblWeeksEl.textContent = weeks;
